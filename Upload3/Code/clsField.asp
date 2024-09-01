@@ -144,8 +144,34 @@ Class clsField
 	End Property
 ' ------------------------------------------------------------------------------
 	Public Property Get Value()
-		Value = CStrU(BinaryData)
+		if lenB(BinaryData) > 0 then
+		Value = CStrUTF8(BinaryData)
+		end if
 	End Property
+' ------------------------------------------------------------------------------
+	Private Function CStrUTF8(ByRef pstrANSI)
+		Set stream = CreateObject("ADODB.Stream")
+	    
+	    ' Specify stream type - we want to save binary data
+	    stream.Type = 1 ' adTypeBinary
+	    
+	    ' Open the stream and write the binary data
+	    stream.Open
+	    stream.Write ASCII2Bytes(pstrANSI)
+	    
+	    ' Change stream type to text
+	    stream.Position = 0
+	    stream.Type = 2 ' adTypeText
+	    stream.Charset = "utf-8"
+	    
+	    ' Read the text data from the stream
+	    CStrUTF8 = stream.ReadText
+	    
+	    ' Clean up
+	    stream.Close
+	    Set stream = Nothing
+	End Function
+
 ' ------------------------------------------------------------------------------
 	Private Function CStrU(ByRef pstrANSI)
 		
