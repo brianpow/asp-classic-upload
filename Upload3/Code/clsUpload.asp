@@ -1062,7 +1062,7 @@ Call RequestData()
 		If Not IsMultipartFormData() Then
 
 			msg = "multipart/form-data was not received.  "
-			msg = msg & "Make sure that you have specified the endType "
+			msg = msg & "Make sure that you have specified the encType "
 			msg = msg & "attribute to ""multipart/form-data"" in your "
 			msg = msg & "<FORM id=form1 name=form1> tag."
 			
