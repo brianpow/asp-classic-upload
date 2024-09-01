@@ -1049,7 +1049,8 @@ Call RequestData()
 		Dim Connection
 		Dim AdodbVersion
 		Set Connection = CreateObject("ADODB.Connection")
-		AdodbVersion = CDbl(Connection.Version)
+		Seperator= Mid(CStr(1/2),1,1)
+		AdodbVersion = CDbl(Replace(Connection.Version,".",Seperator))
 		Set Connection = Nothing
 
 		If AdodbVersion < 2.5 Then
